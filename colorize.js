@@ -1,4 +1,4 @@
-deepai.setApiKey('5aafe814-cbc7-4258-a94a-3a99ee40f40a');
+deepai.setApiKey(atob('NWFhZmU4MTQtY2JjNy00MjU4LWE5NGEtM2E5OWVlNDBmNDBh'));
 async function colorize() {
 document.getElementById("msg").style.display = 'block';
 	var resp = await deepai.callStandardApi("colorizer", {
