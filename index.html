@@ -5,13 +5,72 @@
 <title>Colorize</title>
 <script src="https://cdnjs.deepai.org/deepai.min.js"></script>
 <script src="colorize.js"></script>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: Arial;
+}
+
+.header {
+	text-align: center;
+	padding: 32px;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+}
+
+.column img {
+	margin-top: 12px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #4CAF50; /*Green*/
+}
+</style>
 </head>
 <body>
 
-<label>URL  : </label>
-<input type="text" id="url"></input>
-<button id="colorize" onclick="colorize()">colorize</button>
-<label id="msg" style="display:none">Loading...</label>
-<div id="resp"></div>
+	<!-- Header -->
+	<div class="header">
+		<h1>Colorize</h1>
+	</div>
+	<div class="row">
+	<div class="column">
+		<label>URL : </label> <input type="text" id="url" style='width:40em'></input>
+		</div>
+		<div class="column" id='buttons'>
+		<button id="colorize" onclick="loadImage()" class="button">colorize</button>
+		</div>
+	</div>
+	<!-- Photo Grid -->
+	<div class="row">
+		<div class="column" id="ipGrid"></div>
+		<div class="column" id="opGrid"></div>
+	</div>
+
 </body>
 </html>
