@@ -3,10 +3,9 @@ async function colorize() {
 		var resp = await deepai.callStandardApi("colorizer", {
 		image: document.getElementById("url").value,
 	});
-	console.log(resp);
-	//await deepai.renderResultIntoElement(resp, document.getElementById('output_img'));
-	document.getElementById("output_img").src = resp.output_url;
 	download(resp.output_url);
+	document.getElementById("output_img").src = resp.output_url;
+	
 }
 
 function loadImage() {
@@ -29,13 +28,32 @@ function loadImage() {
 }
 
 function download(url){
-var btnParent = document.getElementById("buttons");
-var anchor = document.createElement('a');
-anchor.href = url;
-anchor.download = url;
-anchor.target = '_blank';
-var linkText = document.createTextNode("Download");
-anchor.appendChild(linkText);
-btnParent.appendChild(anchor);
+
+toDataURL(url, function(dataUrl) {
+  	var arr = url.split("/");
+  	var btnParent = document.getElementById("buttons");
+	var anchor = document.createElement('a');
+	anchor.href = dataUrl;
+	anchor.download = arr[arr.length-1];
+	anchor.target = '_blank';
+	var linkText = document.createTextNode("Download");
+	anchor.appendChild(linkText);
+	btnParent.appendChild(anchor);
+})
+
 console.log(url);
+}
+
+function toDataURL(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
 }
